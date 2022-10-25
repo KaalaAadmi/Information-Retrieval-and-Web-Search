@@ -16,6 +16,7 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import java.io.*;
@@ -41,7 +42,7 @@ public class Main {
                     break For;
                 case 2:
                     analyzer = new WhitespaceAnalyzer();
-                    analyzer_selection="Whitespcace Analyzer";
+                    analyzer_selection="Whitespace Analyzer";
                     break For;
                 case 3:
                     analyzer = new EnglishAnalyzer();
@@ -89,14 +90,33 @@ public class Main {
 
     public static void searchFiles(Analyzer analyzer) throws IOException, ParseException {
         String index = "indexes";
-        String result_path = "search-results-standard.txt";
+        String result_path = "results/search-results-test-test.txt";
         IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(index)));
         PrintWriter writer = new PrintWriter(result_path, "UTF-8");
         IndexSearcher searcher = new IndexSearcher(reader);
 
-        searcher.setSimilarity(new BM25Similarity());
+        BufferedReader buffer= new BufferedReader(new InputStreamReader(System.in));
+        For:
+        for(;true;) {
+            System.out.println("Please enter the choice for Similarity to be used for searched:\n1) BM25\n2) Vector Space\n");
+            int choice = Integer.parseInt(buffer.readLine());
+            switch (choice) {
+                case 1:
+                    searcher.setSimilarity(new BM25Similarity());
+                    break For;
+                case 2:
+                    searcher.setSimilarity(new ClassicSimilarity());
+                    break For;
+//                case 3:
+//                    searcher.setSimilarity(new AxiomaticF1LOG());
+//                    break For;
+                default:
+                    System.out.println("Wrong Choice! Try again!\n\n\n\n\n");
+                    continue For;
+            }
+        }
 
-         String queries_path = "src/main/resources/cran/cran.qry";
+        String queries_path = "src/main/resources/cran/cran.qry";
         BufferedReader buf = Files.newBufferedReader(Paths.get(queries_path), StandardCharsets.UTF_8);
         MultiFieldQueryParser parser = new MultiFieldQueryParser(new String[] {"title","author","bibliography","content"}, analyzer);
 

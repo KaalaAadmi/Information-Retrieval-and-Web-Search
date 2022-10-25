@@ -2,3 +2,5 @@
 /trec_eval
 /.idea
 /target
+/indexes
+.TODO

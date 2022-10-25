@@ -19,10 +19,10 @@ public class Searcher {
             Document doc = searcher.doc(hits[i].doc);
             /*
              * Write the results in the format expected by trec_eval:
-             * | Query Number | 0 | Document ID | Rank | Score | "EXP" |
+             * | Query Number | 0 | Document ID | Rank | Score | "STANDARD" |
              * (https://stackoverflow.com/questions/4275825/how-to-evaluate-a-search-retrieval-engine-using-trec-eval)
              */
-            writer.println(queryNumber + " 0 " + doc.get("id") + " " + i + " " + hits[i].score + " EXP");
+            writer.println(queryNumber + " 0 " + doc.get("ID") + " " + i + " " + hits[i].score + " STANDARD");
         }
     }
 }

@@ -19,12 +19,12 @@ public class Indexer {
     // Creates a document with the fields specified to be written to an index
     static Document createDocument(String id, String title, String author, String bib, String content){
         Document document = new Document();
-        document.add(new StringField("id", id, Field.Store.YES));
-        document.add(new StringField("path", id, Field.Store.YES));
-        document.add(new TextField("title", title, Field.Store.YES));
-        document.add(new TextField("author", author, Field.Store.YES));
-        document.add(new TextField("bibliography", bib, Field.Store.YES));
-        document.add(new TextField("content", content, Field.Store.YES));
+        document.add(new StringField("ID", id, Field.Store.YES));
+        document.add(new StringField("Path", id, Field.Store.YES));
+        document.add(new TextField("Title", title, Field.Store.YES));
+        document.add(new TextField("Author", author, Field.Store.YES));
+        document.add(new TextField("Bibliography", bib, Field.Store.YES));
+        document.add(new TextField("Content", content, Field.Store.YES));
         return document;
     }
 
