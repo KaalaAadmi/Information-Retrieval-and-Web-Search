@@ -28,6 +28,7 @@ public class Indexer {
         return document;
     }
 
+//    This function separates the cranfield dataset into different documents and indexes them.
     static void indexFiles(IndexWriter writer, Path file, String analyzer_selection) throws IOException {
         try (InputStream stream = Files.newInputStream(file)) {
 

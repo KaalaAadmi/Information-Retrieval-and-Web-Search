@@ -26,6 +26,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Main {
+//    Controller function which calls the indexFiles() and searchFiles()
+//    Gives the user options for choosing the analyzer.
     public static void main(String[] args) throws IOException, ParseException {
         //Give user the option to choose the analyzer of their choice.
         Analyzer analyzer;
@@ -64,6 +66,8 @@ public class Main {
         indexFiles(analyzer,analyzer_selection);
         searchFiles(analyzer);
     }
+
+//    This function calls the Indexer class' indexFiles() to perform the indexing of the documents.
     public static void indexFiles(Analyzer analyzer, String analyzer_selection){
         String index_path = "indexes";
         String docs_path = "src/main/resources/cran/cran.all.1400";
@@ -87,7 +91,7 @@ public class Main {
             System.out.println("Error Details: "+e.getStackTrace());
         }
     }
-
+//    This function calls the Searcher class' performSearch() to perform the search operation for a query and saves the result in a text file.
     public static void searchFiles(Analyzer analyzer) throws IOException, ParseException {
         String index = "indexes";
         String result_path = "results/search-results-test-test.txt";

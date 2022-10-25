@@ -11,6 +11,7 @@ public class Searcher {
 
     private Searcher() {}
 
+//    This function performs the search based upon the query passed from the controller function
     public static void performSearch(IndexSearcher searcher, PrintWriter writer, Integer queryNumber, Query query) throws IOException {
         TopDocs result = searcher.search(query, 1400);
         ScoreDoc hits[] = result.scoreDocs;
